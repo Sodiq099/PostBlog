@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input  type="text" id="title" placeholder="Title"><br><br>
+    <input type="text" id="author" placeholder="Author"><br><br>
+    <input type="text" id="content" placeholder="Content"><br><br>
+    <button onclick="submitPost(event)">Post log</button>
+</body>
+</html>
+<script>
+    fetch("http://localhost:3344/blog").then(res=>res.json())
+    .then(data=>console.log(data))
+    function submitPost(ev){
+        ev.preventDefault();
+        let data = {id: null, authour: author.value, content: content.value, title: title.value };
+        console.log(data);
+
+        fetch("http://localhost:3344/blog", {
+            headers:{
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify(data)
+        }).then(res=>res.json())
+        .then(data=>console.log(data))
+    }
+</script>
